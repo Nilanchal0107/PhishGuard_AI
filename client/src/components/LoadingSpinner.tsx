@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 export default function LoadingSpinner() {
   return (
     <div style={{ animation: "fadeSlideUp 0.25s ease", marginTop: "1.5rem" }}>
@@ -39,4 +40,13 @@ export default function LoadingSpinner() {
       </div>
     </div>
   );
+=======
+export default function LoadingSpinner() {
+  return (
+    <div className="flex items-center gap-2 text-sm text-gray-700">
+      <div className="h-4 w-4 animate-spin rounded-full border-2 border-gray-300 border-t-gray-800" />
+      <span>Analyzing…</span>
+    </div>
+  );
+>>>>>>> 60e30398828e4645438e4781d4c5132c751f3dd6
 }

@@ -20,4 +20,8 @@ app.get("/health", (req, res) => {
 const PORT = process.env.PORT ? Number(process.env.PORT) : 5000;
 app.listen(PORT, () => {
   console.log(`PhishGuard server listening on ${PORT}`);
+<<<<<<< HEAD
 });
+=======
+});
+>>>>>>> 60e30398828e4645438e4781d4c5132c751f3dd6
