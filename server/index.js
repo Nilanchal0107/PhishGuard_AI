@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const dotenv = require("dotenv");
+const path = require("path");
 
 dotenv.config({ path: "../.env" });
 
@@ -33,6 +34,13 @@ app.use("/api/audio", require("./routes/audio"));
 
 app.get("/health", (req, res) => {
   res.json({ ok: true });
+});
+
+// Serve built React frontend for all non-API routes
+const clientDist = path.join(__dirname, "../client/dist");
+app.use(express.static(clientDist));
+app.get("*", (_req, res) => {
+  res.sendFile(path.join(clientDist, "index.html"));
 });
 
 const PORT = process.env.PORT ? Number(process.env.PORT) : 5000;

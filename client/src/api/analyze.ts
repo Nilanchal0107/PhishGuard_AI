@@ -1,8 +1,8 @@
 import type { AnalysisResult, ApiError } from "../types/analysis";
 
+// Empty string = relative URL (works via Vite proxy in dev, and same-origin in prod)
 const API_BASE =
-  (import.meta.env.VITE_API_BASE_URL as string | undefined)?.replace(/\/$/, "") ||
-  "http://localhost:5000";
+  (import.meta.env.VITE_API_BASE_URL as string | undefined)?.replace(/\/$/, "") ?? "";
 
 async function parseJsonOrThrow(res: Response): Promise<any> {
   const text = await res.text();
