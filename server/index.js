@@ -6,7 +6,25 @@ dotenv.config({ path: "../.env" });
 
 const app = express();
 
-app.use(cors());
+const allowedOrigins = (process.env.CORS_ORIGIN || "")
+  .split(",")
+  .map((origin) => origin.trim())
+  .filter(Boolean);
+
+app.use(
+  cors({
+    origin(origin, callback) {
+      // Allow server-to-server tools and same-origin requests without Origin header.
+      if (!origin) return callback(null, true);
+
+      if (allowedOrigins.length === 0 || allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      }
+
+      return callback(new Error("Not allowed by CORS"));
+    },
+  })
+);
 app.use(express.json({ limit: "1mb" }));
 
 // Routes will be implemented in later steps.
@@ -20,8 +38,4 @@ app.get("/health", (req, res) => {
 const PORT = process.env.PORT ? Number(process.env.PORT) : 5000;
 app.listen(PORT, () => {
   console.log(`PhishGuard server listening on ${PORT}`);
-<<<<<<< HEAD
 });
-=======
-});
->>>>>>> 60e30398828e4645438e4781d4c5132c751f3dd6
